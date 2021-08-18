@@ -51,6 +51,7 @@ def get_spelling_mistakes(all_tweets:List[str])->List[float]:
             if(l==1.0):
                 spelling_scores.append(1.0)
     return spelling_scores
+    
 
 def get_score1(keyword: str)->int:
     tweets=get_tweets(keyword)
