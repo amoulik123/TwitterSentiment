@@ -1,7 +1,7 @@
 #Checking when do people make mistakes the most when talking about specific topics
 
 #Example: Batman vs Superman
-#Superman tweets have more spelling errors, hence Superman fans are dumb
+#Superman tweets are talked about more and have more spelling errors
 import tweepy
 from textblob import TextBlob
 import preprocessor as p
@@ -51,9 +51,9 @@ def get_spelling_mistakes(all_tweets:List[str])->List[float]:
             if(l==1.0):
                 spelling_scores.append(1.0)
     return spelling_scores
-    
 
-def get_score1(keyword: str)->int:
+
+def get_spelling_score(keyword: str)->int:
     tweets=get_tweets(keyword)
     tweets_cleaned=cleanup_tweets(tweets)
     spelling_scored=get_spelling_mistakes(tweets_cleaned)
@@ -67,16 +67,22 @@ def get_score(keyword: str)->int:
 
 
 
-str1="Ben Shapiro"
-str2="Joe Biden"
+print("Enter First Word")
+str1=input()
+print("Enter Second Word")
+str2=input()
 
-print("Spellings for Shapiro ")
-print(get_score1(str1))
-print("Spellings for Biden ")
-print(get_score1(str2))
-if get_score(str1)>get_score(str2):
-    print(str1+" kicks the ass of "+str2)
+if(get_score(str1)>get_score(str2)):
+    print(str1+" gets talked about more than "+str2)
+    if(get_spelling_score(str1)<get_spelling_score(str2)):
+        print("People also make more mistakes when talking about "+str1)
+    else:
+        print("However, people make less mistakes when talking about "+str1)
 else:
-    print(str2+" kicks the ass of "+str1)
+    print(str2+" gets talked about more than "+str1)
+    if(get_spelling_score(str2)<get_spelling_score(str1)):
+        print("People also make more mistakes when talking about "+str2)
+    else:
+        print("However, people make less mistakes when talking about "+str2)
 
 
